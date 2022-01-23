@@ -1,0 +1,12 @@
+{
+  "xsappname": "capconsole",
+  "tenant-mode": "dedicated",
+  "scopes": [{ "name": "$XSAPPNAME.user", "description": "User" }],
+  "attributes": [],
+  "role-templates": [ { "name": "user", "scope-references": [ "$XSAPPNAME.user" ], "description": "User Cap example" }],
+  "authorities":
+    [
+        "$ACCEPT_GRANTED_AUTHORITIES","$XSAPPNAME.user"
+    ]
+ 
+}

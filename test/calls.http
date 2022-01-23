@@ -1,0 +1,69 @@
+### Get plants
+GET http://localhost:4004/catalog/Plant?$top=3
+
+### Get plants details
+GET http://localhost:4004/catalog/Plant?$expand=to_Medicinal_properties,texts,to_Location
+
+### Get plants spanish
+GET http://localhost:4004/catalog/Plant?&sap-language=es
+
+### Get plants spanish (header)
+GET http://localhost:4004/catalog/Plant
+Accept-Language: es
+
+### Get details medicinal properties (texts)
+GET http://localhost:4004/catalog/Plant?$expand=to_Medicinal_properties($expand=to_Medicinal_properties)
+
+### Get details medicinal properties (texts)
+GET http://localhost:4004/catalog/Plant?$expand=to_Medicinal_properties($expand=to_Medicinal_properties($select=Name))&filter=to_Medicial_properties/plant_ID eq 1
+
+### Get metadata V2 (texts)
+GET http://localhost:4004/v2/catalog/$metadata
+
+### GET Location
+GET http://localhost:4004/catalog/Location
+
+### POST new Location
+POST http://localhost:4004/catalog/Location
+Content-Type: application/json
+
+{
+    "Plant_ID":1,
+    "status_ID":"C",
+    "Latitude":3.248392,
+    "Logitud":4.524950
+}
+
+### Patch Location
+PATCH http://localhost:4004/catalog/Location(Plant_ID=1,Latitude=3.248392,Logitud=4.524950)
+Content-Type: application/json
+
+{
+    "status_ID":"V"
+}
+
+### Delete Location
+DELETE http://localhost:4004/catalog/Location(Plant_ID=1,Latitude=3.248392,Logitud=4.524950)
+
+### Post plant
+POST http://localhost:4004/catalog/Plant
+Content-Type: application/json
+
+{
+    "ID":0,
+"Name":"test",
+"Description":"test",
+"Blooming_beg":"1900-06-01",
+"Blooming_end":"1900-08-31",
+"Photo_URL":"http://www.biosfera.cat/biosfera_cat_biosfera/wp-content/uploads/2010/09/camamilla.jpg"
+
+}
+
+### Post Medicinal_properties
+POST http://localhost:4004/catalog/Medicinal_property
+Content-Type: application/json
+
+{
+    "Name":"testing",
+    "Description":"Testing"
+}

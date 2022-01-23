@@ -1,0 +1,90 @@
+{
+  "name": "cap-console",
+  "version": "1.0.0",
+  "description": "A simple CAP project.",
+  "repository": "<Add your repository here>",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "@sap/cds": "^5",
+    "@sap/cds-odata-v2-adapter-proxy": "^1.8.5",
+    "express": "^4",
+    "hdb": "^0.18.3",
+    "passport": "^0.4.1"
+  },
+  "devDependencies": {
+    "chai": "^4.3.0",
+    "chai-as-promised": "^7.1.1",
+    "chai-subset": "^1.6.0",
+    "jest": "^27.1.0",
+    "sqlite3": "^5.0.2"
+  },
+  "engines" : { "node" : "12.22.6" } ,
+  "scripts": {
+    "start": "cds run",
+    "test": "jest"
+  },
+  "eslintConfig": {
+    "extends": "eslint:recommended",
+    "env": {
+      "es2020": true,
+      "node": true,
+      "jest": true,
+      "mocha": true
+    },
+    "globals": {
+      "SELECT": true,
+      "INSERT": true,
+      "UPDATE": true,
+      "DELETE": true,
+      "CREATE": true,
+      "DROP": true,
+      "CDL": true,
+      "CQL": true,
+      "CXL": true,
+      "cds": true
+    },
+    "rules": {
+      "no-console": "off",
+      "require-atomic-updates": "off"
+    }
+  },
+  "cds": {
+    "env":{
+        "runtime": {
+            "protectMetadata": false
+        }
+    },
+    "requires": {
+     "[development]":{
+        "auth": { 
+            "kind": "dummy-auth"
+         }
+     },
+     "[development2]":{
+        "auth": {
+            "kind": "basic-auth",
+            "users": {
+              "test": { 
+                "password": "test", 
+                "roles": [ "user" ]
+              }
+            }
+          }},
+      "db": {
+        "[development]": { 
+                "kind": "sqlite",
+                "credentials": {
+                    "database": "sqlite.db"
+                } 
+            },
+            "[production]": { 
+                "kind": "hana" 
+            }
+        }
+    },
+    "hana": {
+      "deploy-format": "hdbtable"
+    }
+  }
+}
